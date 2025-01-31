@@ -1,3 +1,12 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: deploy-application-dev
+  title: Deploy Application (Development)
+  description: Request permission to deploy an application, by opening a PR.
+spec:
+  owner: platform-engineering
+  type: template
 # Edit the template parameters below to see how they will render in the scaffolder form UI
 parameters:
   - title: Select the Component
