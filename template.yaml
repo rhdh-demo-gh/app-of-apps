@@ -7,65 +7,65 @@ metadata:
 spec:
   owner: platform-engineering
   type: template
-# Edit the template parameters below to see how they will render in the scaffolder form UI
-parameters:
-  - title: Select the Component
-    required:
-      - component
-    properties:
-      component:
-        title: Component
-        type: string
-        description: The Component you wish to deploy
-        ui:field: EntityPicker
-        ui:options:
-          allowArbitraryValues: false
-          catalogFilter:
-            kind: Component
-steps:
-  - id: writeFile
-    name: Create File
-    action: roadiehq:utils:fs:write
-    input:
-      path: application.${{ parameters.component | parseEntityRef | pick('name') }}.yaml
-      content: |
-        apiVersion: argoproj.io/v1alpha1
-        kind: Application
-        metadata:
-          name: ${{ parameters.component | parseEntityRef | pick('name') }}
-          namespace: argocd
-          labels:
-            component: ${{ parameters.component | parseEntityRef | pick('name') }}
-        spec:
-          project: default
-          source:
-            repoURL: https://github.com/${{ parameters.component | parseEntityRef | pick('name') }}-manifests.git
-            targetRevision: main
-            path: k8s
-          destination:
-            server: https://kubernetes.default.svc
-            namespace: ${{ parameters.name }}
-          syncPolicy:
-            syncOptions:
-            - CreateNamespace=true
-            automated:
-              prune: true
-              selfHeal: true
+  # Edit the template parameters below to see how they will render in the scaffolder form UI
+  parameters:
+    - title: Select the Component
+      required:
+        - component
+      properties:
+        component:
+          title: Component
+          type: string
+          description: The Component you wish to deploy
+          ui:field: EntityPicker
+          ui:options:
+            allowArbitraryValues: false
+            catalogFilter:
+              kind: Component
+  steps:
+    - id: writeFile
+      name: Create File
+      action: roadiehq:utils:fs:write
+      input:
+        path: application.${{ parameters.component | parseEntityRef | pick('name') }}.yaml
+        content: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            name: ${{ parameters.component | parseEntityRef | pick('name') }}
+            namespace: argocd
+            labels:
+              component: ${{ parameters.component | parseEntityRef | pick('name') }}
+          spec:
+            project: default
+            source:
+              repoURL: https://github.com/${{ parameters.component | parseEntityRef | pick('name') }}-manifests.git
+              targetRevision: main
+              path: k8s
+            destination:
+              server: https://kubernetes.default.svc
+              namespace: ${{ parameters.name }}
+            syncPolicy:
+              syncOptions:
+              - CreateNamespace=true
+              automated:
+                prune: true
+                selfHeal: true
+    
+    - id: openPullRequest
+      name: Create Pull Request
+      action: publish:github:pull-request
+      input:
+        repoUrl: https://github.com/rhdh-demo-gh/app-of-apps
+        title: "New Application: ${{ parameters.component | parseEntityRef | pick('name') }}"
+        description: Automated PR from the IDP 🚀
+        commitMessage: "feat: add application.yaml for ${{ parameters.component | parseEntityRef | pick('name') }}"
+        sourcePath: ./
+        targetPath: ./applications/
+        update: true
+        branchName: add-${{ parameters.component | parseEntityRef | pick('name') }}
   
-  - id: openPullRequest
-    name: Create Pull Request
-    action: publish:github:pull-request
-    input:
-      repoUrl: https://github.com/rhdh-demo-gh/app-of-apps
-      title: "New Application: ${{ parameters.component | parseEntityRef | pick('name') }}"
-      description: Automated PR from the IDP 🚀
-      commitMessage: "feat: add application.yaml for ${{ parameters.component | parseEntityRef | pick('name') }}"
-      sourcePath: ./
-      targetPath: ./applications/
-      update: true
-      branchName: add-${{ parameters.component | parseEntityRef | pick('name') }}
-
-output:
-  links:
-    - url: {{ '${{ steps.openPullRequest.output.remoteUrl }}' }}
-      title: GitOps Application Pull Request 
+  output:
+    links:
+      - url: {{ '${{ steps.openPullRequest.output.remoteUrl }}' }}
+        title: GitOps Application Pull Request 
