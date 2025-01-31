@@ -57,8 +57,8 @@ spec:
       action: publish:github:pull-request
       input:
         repoUrl: github.com?repo=app-of-apps&owner=rhdh-demo-gh
-        title: "New Application: ${{ parameters.component | parseEntityRef | pick('name') }}"
-        description: Automated PR from the IDP 🚀
+        title: "🤖 New Application (dev): ${{ parameters.component | parseEntityRef | pick('name') }}"
+        description: "User *${{ user.entity.metadata.name }}* requests a new deployment! 🚀"
         commitMessage: "feat: add application.yaml for ${{ parameters.component | parseEntityRef | pick('name') }}"
         sourcePath: ./
         targetPath: ./applications/
