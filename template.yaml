@@ -67,5 +67,5 @@ spec:
   
   output:
     links:
-      - url: {{ '${{ steps.openPullRequest.output.remoteUrl }}' }}
+      - url: ${{ steps.openPullRequest.output.remoteUrl }}
         title: GitOps Application Pull Request 
