@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: consent-management-api
+  namespace: argocd
+  labels:
+    component: consent-management-api
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/consent-management-api-manifests.git
+    targetRevision: main
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: 
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
