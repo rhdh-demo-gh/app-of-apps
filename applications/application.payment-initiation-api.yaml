@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: payment-initiation-api
+  namespace: argocd
+  labels:
+    component: payment-initiation-api
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/payment-initiation-api-manifests.git
+    targetRevision: main
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: 
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
