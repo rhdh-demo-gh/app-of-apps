@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: account-portal
-  namespace: argocd
+  namespace: janus-argocd
   labels:
     environment: development
     component: account-portal
