@@ -13,7 +13,7 @@ spec:
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
-    namespace: -development
+    namespace: account-portal-development
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
