@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: account-portal
+  namespace: argocd
+  labels:
+    environment: development
+    component: account-portal
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/account-portal-manifests.git
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: -development
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
