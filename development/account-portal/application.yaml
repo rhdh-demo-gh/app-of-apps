@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/account-portal-manifests.git
     targetRevision: main
-    path: ./
+    path: ./development
   destination:
     server: https://kubernetes.default.svc
     namespace: account-portal-development
