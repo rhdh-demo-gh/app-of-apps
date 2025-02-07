@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/account-portal-manifests.git
+    repoURL: https://github.com/rhdh-demo-gh/account-portal-manifests.git
     targetRevision: main
     path: ./development
   destination:
