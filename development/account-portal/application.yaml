@@ -9,6 +9,9 @@ metadata:
 spec:
   project: default
   source:
+    helm:
+      valueFiles:
+      - values.yaml
     repoURL: https://github.com/rhdh-demo-gh/account-portal-manifests.git
     targetRevision: main
     path: ./development
