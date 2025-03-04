@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: commissary
-  namespace: openshift-gitops
+  namespace: rhdh-gitops
   labels:
     environment: development
     component: commissary
