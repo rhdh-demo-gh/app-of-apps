@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: retirement-planning-ui
+  namespace: janus-argocd
+  labels:
+    environment: development
+    component: retirement-planning-ui
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rhdh-demo-gh/retirement-planning-ui-manifests.git
+    targetRevision: main
+    path: development
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: retirement-planning-ui-development
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
