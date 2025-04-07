@@ -1,5 +1,5 @@
-site_name: ${{ values.name }}
-site_description: ${{ values.name }}
+site_name: App of Apps
+site_description: Documentation for deploying applications!
 
 plugins:
   - techdocs-core
