@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: app-of-apps
+  description: GitOps repository to manage all application deployments
+  annotations:
+    argocd/app-name: app-of-apps
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: rhdh-demo-gh/app-of-apps
+spec:
+  type: repository
+  lifecycle: production
+  owner: group:default/platform-engineering
