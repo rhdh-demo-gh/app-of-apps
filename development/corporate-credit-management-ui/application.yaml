@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: corporate-credit-management-ui
+  namespace: janus-argocd
+  labels:
+    environment: development
+    component: corporate-credit-management-ui
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rhdh-demo-gh/corporate-credit-management-ui-manifests.git
+    targetRevision: main
+    path: development
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: corporate-credit-management-ui-development
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
