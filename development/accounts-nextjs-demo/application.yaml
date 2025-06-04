@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: accounts-nextjs-demo
+  namespace: janus-argocd
+  labels:
+    environment: development
+    component: accounts-nextjs-demo
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rhdh-demo-gh/accounts-nextjs-demo-manifests.git
+    targetRevision: main
+    path: development
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: accounts-nextjs-demo-development
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
