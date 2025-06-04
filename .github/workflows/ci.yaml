@@ -14,8 +14,8 @@ jobs:
       - name: 'Lint (Development)'
         uses: ibiqlik/action-yamllint@v3
         with:
-          file_or_dir: 'development/**/*.yaml'
+          file_or_dir: 'development/'
       - name: 'Lint (Production)'
         uses: ibiqlik/action-yamllint@v3
         with:
-          file_or_dir: 'production/**/*.yaml'
+          file_or_dir: 'production/'
