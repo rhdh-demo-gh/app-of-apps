@@ -9,21 +9,13 @@ jobs:
     name: 'YAML Lint'
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout'
-        uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: 'Lint (Development)'
-        uses: karancode/yamllint-github-action@v2.1.1
+        uses: ibiqlik/action-yamllint@v3
         with:
-          yamllint_file_or_dir: 'development'
-          yamllint_strict: false
-          yamllint_comment: true
-        env:
-          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          file_or_dir: 'development/**/*.yaml'
       - name: 'Lint (Production)'
-        uses: karancode/yamllint-github-action@v2.1.1
+        uses: ibiqlik/action-yamllint@v3
         with:
-          yamllint_file_or_dir: 'production'
-          yamllint_strict: false
-          yamllint_comment: true
-        env:
-          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          file_or_dir: 'production/**/*.yaml'
