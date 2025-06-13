@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: approvals-example
+  namespace: openshift-gitops
+  labels:
+    environment: development
+    component: approvals-example
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rhdh-demo-gh/approvals-example-manifests.git
+    targetRevision: main
+    path: development
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: approvals-example-development
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
