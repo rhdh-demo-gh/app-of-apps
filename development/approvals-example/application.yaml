@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: approvals-example
-  namespace: openshift-gitops
+  namespace: janus-argocd
   labels:
     environment: development
     component: approvals-example
