@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: accounts-nextjs-demo
-  namespace: openshift-gitops
+  namespace: janus-argocd
   labels:
     environment: development
     component: accounts-nextjs-demo
